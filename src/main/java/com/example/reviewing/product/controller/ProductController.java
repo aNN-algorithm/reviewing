@@ -28,9 +28,4 @@ public class ProductController {
 
         return null;
     }
-
-    // 테스트용
-    @PostMapping("/products")
-    public void saveProduct() {
-    }
 }

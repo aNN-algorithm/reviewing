@@ -12,7 +12,4 @@ public class ProductService {
 
     private final JpaProductRepository jpaProductRepository;
 
-    public void saveProduct(ProductEntity productEntity) {
-        jpaProductRepository.save(productEntity);
-    }
 }
