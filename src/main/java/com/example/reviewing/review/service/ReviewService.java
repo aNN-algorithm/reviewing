@@ -2,11 +2,17 @@ package com.example.reviewing.review.service;
 
 import com.example.reviewing.product.domain.dto.ReviewSaveRequest;
 import com.example.reviewing.product.repository.JpaProductRepository;
+import com.example.reviewing.product.service.ProductService;
 import com.example.reviewing.review.domain.ReviewEntity;
+import com.example.reviewing.review.domain.dto.Review;
+import com.example.reviewing.review.domain.dto.ReviewResponse;
 import com.example.reviewing.review.repository.JpaReviewRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -14,8 +20,10 @@ public class ReviewService {
 
     private final JpaProductRepository jpaProductRepository;
     private final JpaReviewRepository jpaReviewRepository;
+    private final ProductService productService;
 
-    @Async
+    final static int DEFAULT_PAGE_SIZE = 10;
+
     public void saveReview(Long productId, ReviewSaveRequest request) {
 
         // 리뷰는 존재하는 상품에만 적용
@@ -32,7 +40,15 @@ public class ReviewService {
         jpaReviewRepository.save(ReviewEntity.toEntity(productId, request));
 
         // product 에 반영
+        productService.updateIncrementProductReview(productId, request.getScore());
     }
+
+    public List<ReviewEntity> findAllByLastReviewIdCheckExistCursor(Long productId, Long lastReviewId, Pageable page) {
+
+        return lastReviewId == 0 ? jpaReviewRepository.findAllByProductIdOrderByIdDesc(productId, page)
+                : jpaReviewRepository.findByIdLessThanAndProductIdOrderByIdDesc(lastReviewId, productId, page);
+    }
+
 
     public void validate(boolean isValid, String message) {
         if (!isValid) {
