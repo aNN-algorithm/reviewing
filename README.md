@@ -55,27 +55,27 @@ NONE
 ### ✅ 응답
 ```
 {
-		"totalCount": 15, // 해당 상품에 작성된 총리뷰 수
-		"score": 4.6, // 평균 점수
-		"cursor": 6,
-		"reviews": [
-				{
-						"id": 15,
-						"userId": 1, // 작성자 유저 아이디
-						"score": 5,
-						"content": "이걸 사용하고 제 인생이 달라졌습니다.",
-						"imageUrl": "/image.png",
-						"createdAt": "2024-11-25T00:00:00.000Z"
-				},
-				{
-						"id": 14,
-						"userId": 3, // 작성자 유저 아이디
-						"score": 5,
-						"content": "이걸 사용하고 제 인생이 달라졌습니다.",
-						"imageUrl": null,
-						"createdAt": "2024-11-24T00:00:00.000Z"
-				}
-		]
+	"totalCount": 15, // 해당 상품에 작성된 총리뷰 수
+	"score": 4.6, // 평균 점수
+	"cursor": 6,
+	"reviews": [
+		{
+			"id": 15,
+			"userId": 1, // 작성자 유저 아이디
+			"score": 5,
+			"content": "이걸 사용하고 제 인생이 달라졌습니다.",
+			"imageUrl": "/image.png",
+			"createdAt": "2024-11-25T00:00:00.000Z"
+		},
+		{
+			"id": 14,
+			"userId": 3, // 작성자 유저 아이디
+			"score": 5,
+			"content": "이걸 사용하고 제 인생이 달라졌습니다.",
+			"imageUrl": null,
+			"createdAt": "2024-11-24T00:00:00.000Z"
+		},...
+	]
 }
 ```
 ### ✅ 처리 과정
@@ -86,9 +86,12 @@ NONE
 ### 2. 인덱스 부여하여 조회 성능 향상
 ![image](https://github.com/user-attachments/assets/8700c9cd-881a-4ca0-91d2-d0bd9a441f8b)
 ## 🎯 ERD 명세서
-<img width="544" alt="image" src="https://github.com/user-attachments/assets/76ff56a2-3244-417d-b368-c8a4c956b29a">
+<img width="445" alt="image" src="https://github.com/user-attachments/assets/7a02069b-8bb0-49d3-83a7-4c171f23f416">
+
 
 ## 기술 스택
-JAVA
-MySQL
-Docker
+<div align=left> 
+  <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
+  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+  <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
+</div>
