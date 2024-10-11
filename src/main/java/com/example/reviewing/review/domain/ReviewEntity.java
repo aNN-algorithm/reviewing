@@ -14,7 +14,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Table(name = "review")
+@Table(name = "review", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"product_id", "user_id"})  // 복합 유니크 인덱스 설정
+})
 public class ReviewEntity {
 
     @Id
@@ -25,7 +27,7 @@ public class ReviewEntity {
     @Column(name = "product_id", nullable = false)
     private Long productId;
 
-    @Column(name = "name_id", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
     @Column(name = "score", nullable = false)
