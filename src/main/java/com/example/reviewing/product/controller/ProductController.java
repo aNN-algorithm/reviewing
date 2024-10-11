@@ -20,12 +20,4 @@ public class ProductController {
                            @RequestBody ReviewSaveRequest reviewSaveRequest) {
         reviewService.saveReview(productId, reviewSaveRequest);
     }
-
-    @GetMapping("/products/{productId}/reviews")
-    public ReviewSaveResponse getReview(@PathVariable Long productId,
-                                        @RequestParam("cursor") int cursor,
-                                        @RequestParam("size") int size) {
-
-        return null;
-    }
 }

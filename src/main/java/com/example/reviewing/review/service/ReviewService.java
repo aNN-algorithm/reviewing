@@ -1,19 +1,21 @@
 package com.example.reviewing.review.service;
 
+import com.example.reviewing.product.domain.ProductEntity;
 import com.example.reviewing.product.domain.dto.ReviewSaveRequest;
 import com.example.reviewing.product.repository.JpaProductRepository;
 import com.example.reviewing.product.service.ProductService;
 import com.example.reviewing.review.domain.ReviewEntity;
-import com.example.reviewing.review.domain.dto.Review;
 import com.example.reviewing.review.domain.dto.ReviewResponse;
 import com.example.reviewing.review.repository.JpaReviewRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ReviewService {
@@ -41,6 +43,20 @@ public class ReviewService {
 
         // product 에 반영
         productService.updateIncrementProductReview(productId, request.getScore());
+    }
+
+    public ReviewResponse getReview(Long productId, Long lastReviewId, int size) {
+
+        ProductEntity productEntity = jpaProductRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException("not found ID"));
+        Pageable page = PageRequest.of(0, size);
+        List<ReviewEntity> reviews = findAllByLastReviewIdCheckExistCursor(productId, lastReviewId, page);
+
+        return ReviewResponse.builder()
+                .totalCount(productEntity.getReviewCount())
+                .score(productEntity.getScore() / productEntity.getReviewCount())
+                .cursor(reviews.get(reviews.size() - 1).getId())
+                .reviews(reviews)
+                .build();
     }
 
     public List<ReviewEntity> findAllByLastReviewIdCheckExistCursor(Long productId, Long lastReviewId, Pageable page) {
