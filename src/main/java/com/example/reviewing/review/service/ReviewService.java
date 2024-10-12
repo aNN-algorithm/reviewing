@@ -27,8 +27,6 @@ public class ReviewService {
 
     final static int DEFAULT_PAGE_SIZE = 10;
 
-    @Transactional
-//    public void saveReview(Long productId, ReviewSaveRequest request) {
     public void saveReview(Long productId, ReviewSaveRequest request) {
 
         // 리뷰는 존재하는 상품에만 적용
