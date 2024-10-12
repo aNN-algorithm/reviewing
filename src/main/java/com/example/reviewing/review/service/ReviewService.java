@@ -7,6 +7,7 @@ import com.example.reviewing.product.service.ProductService;
 import com.example.reviewing.review.domain.ReviewEntity;
 import com.example.reviewing.review.domain.dto.ReviewResponse;
 import com.example.reviewing.review.repository.JpaReviewRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -39,6 +40,7 @@ public class ReviewService {
         validate(request.getScore() > 0 && request.getScore() <= 5, "1 ~ 5점 사이 값을 입력해주세요.");
 
         // 저장
+//        jpaReviewRepository.save(ReviewEntity.toEntity(productId, request));
         jpaReviewRepository.save(ReviewEntity.toEntity(productId, request));
 
         // product 에 반영

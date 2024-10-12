@@ -42,6 +42,7 @@ public class ReviewEntity {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    //public static ReviewEntity toEntity(Long productId, ReviewSaveRequest request) {
     public static ReviewEntity toEntity(Long productId, ReviewSaveRequest request) {
         return ReviewEntity.builder()
                 .productId(productId)

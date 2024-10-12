@@ -9,7 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @RestController
@@ -22,6 +21,7 @@ public class ReviewController {
     @PostMapping("/products/{productId}/reviews")
     public void saveReview(@PathVariable Long productId,
                            @RequestBody ReviewSaveRequest reviewSaveRequest) {
+
         reviewService.saveReview(productId, reviewSaveRequest);
     }
 
