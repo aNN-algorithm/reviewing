@@ -11,26 +11,4 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 public class ProductController {
-
-    private final ProductService productService;
-    private final ReviewService reviewService;
-
-    @PostMapping("/products/{productId}/reviews")
-    public void saveReview(@PathVariable Long productId,
-                           @RequestBody ReviewSaveRequest reviewSaveRequest) {
-        reviewService.saveReview(productId, reviewSaveRequest);
-    }
-
-    @GetMapping("/products/{productId}/reviews")
-    public ReviewSaveResponse getReview(@PathVariable Long productId,
-                                        @RequestParam("cursor") int cursor,
-                                        @RequestParam("size") int size) {
-
-        return null;
-    }
-
-    // 테스트용
-    @PostMapping("/products")
-    public void saveProduct() {
-    }
 }

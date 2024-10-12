@@ -1,9 +1,11 @@
 package com.example.reviewing.product.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
 @Table(name = "product")
+@Getter
 public class ProductEntity {
 
     @Id

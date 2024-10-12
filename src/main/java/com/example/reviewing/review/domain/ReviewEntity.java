@@ -4,6 +4,7 @@ import com.example.reviewing.product.domain.dto.ReviewSaveRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -12,7 +13,10 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "review")
+@Getter
+@Table(name = "review", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"product_id", "user_id"})  // 복합 유니크 인덱스 설정
+})
 public class ReviewEntity {
 
     @Id
@@ -23,7 +27,7 @@ public class ReviewEntity {
     @Column(name = "product_id", nullable = false)
     private Long productId;
 
-    @Column(name = "name_id", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
     @Column(name = "score", nullable = false)
@@ -38,6 +42,7 @@ public class ReviewEntity {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    //public static ReviewEntity toEntity(Long productId, ReviewSaveRequest request) {
     public static ReviewEntity toEntity(Long productId, ReviewSaveRequest request) {
         return ReviewEntity.builder()
                 .productId(productId)
